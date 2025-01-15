@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Nunito, Quicksand } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
   style: ["normal", "italic"],
   weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+export const quickSand = Quicksand({
+  subsets: ["latin", "latin-ext"],
+  style: ["normal"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
