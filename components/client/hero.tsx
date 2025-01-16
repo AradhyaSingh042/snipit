@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -17,15 +18,20 @@ const Hero = () => {
         </p>
 
         <div className="buttons-container mt-3 flex flex-row items-center gap-5">
-          <Button className="px-7 py-6 dark:bg-slate-100 dark:text-black">
-            Get Started
-          </Button>
-          <Button
-            variant="outline"
-            className="px-7 py-6 dark:bg-zinc-700 dark:border-none dark:text-slate-100"
-          >
-            Learn More
-          </Button>
+          <Link href="/auth/signup">
+            <Button className="px-7 py-6 dark:bg-slate-100 dark:text-black">
+              Get Started
+            </Button>
+          </Link>
+
+          <a href="https://github.com/AradhyaSingh042/snipit" target="_blank">
+            <Button
+              variant="outline"
+              className="px-7 py-6 dark:bg-zinc-700 dark:border-none dark:text-slate-100"
+            >
+              Learn More
+            </Button>
+          </a>
         </div>
 
         <span className="mt-5 text-sm text-gray-500 dark:text-gray-400">

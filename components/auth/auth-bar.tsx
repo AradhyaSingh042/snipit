@@ -1,7 +1,6 @@
 "use client";
 
-import { FaCode } from "react-icons/fa6";
-import { Button } from "../ui/button";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import { Separator } from "@/components/ui/separator";
 import { IoSunnyOutline } from "react-icons/io5";
 import { FiMoon } from "react-icons/fi";
@@ -16,24 +15,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "@/hooks/use-theme";
 import { useSnippetStore } from "@/store/snippet";
-import { quickSand } from "@/lib/fonts";
 import Link from "next/link";
 
-const Navbar = () => {
+const AuthBar = () => {
   const { darkMode, setDarkMode } = useSnippetStore();
   useTheme();
 
   return (
     <>
       <header className="w-full flex justify-center dark:bg-zinc-900">
-        <nav className="w-11/12 flex justify-between items-center py-3">
-          <div className="left-container flex flex-row items-center gap-3">
-            <FaCode className="scale-150 dark:text-slate-100" />
-            <h3
-              className={`font-bold text-lg tracking-wide dark:text-slate-100 capitalize ${quickSand.className}`}
-            >
-              Snipit
-            </h3>
+        <nav className="w-11/12 flex justify-between items-center py-4">
+          <div className="left-container">
+            <Link href="/" className="flex flex-row items-center gap-2.5">
+              <IoIosArrowRoundBack className="scale-150 dark:text-slate-100 text-black" />
+              <h3 className="font-medium tracking-wider dark:text-slate-100 capitalize">
+                Home
+              </h3>
+            </Link>
           </div>
 
           <div className="right-container flex flex-row gap-3 items-center">
@@ -58,20 +56,6 @@ const Navbar = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Link href="/auth/signin">
-              <Button
-                variant="ghost"
-                className="dark:text-slate-100 dark:hover:bg-zinc-800"
-              >
-                Sign in
-              </Button>
-            </Link>
-
-            <Link href="/auth/signup">
-              <Button className="dark:bg-slate-100 dark:text-black">
-                Get Started
-              </Button>
-            </Link>
           </div>
         </nav>
       </header>
@@ -80,4 +64,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AuthBar;
