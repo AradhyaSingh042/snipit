@@ -29,7 +29,7 @@ const AuthBar = () => {
             <Link href="/" className="flex flex-row items-center gap-2.5">
               <IoIosArrowRoundBack className="scale-150 dark:text-slate-100 text-black" />
               <h3 className="font-medium tracking-wider dark:text-slate-100 capitalize">
-                Home
+                Back
               </h3>
             </Link>
           </div>

@@ -1,11 +1,13 @@
-import { Link } from "lucide-react";
+"use client";
+
+import Link from "next/link";
 import { FaCode } from "react-icons/fa6";
 import { Button } from "../ui/button";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { SiGithub } from "react-icons/si";
 import { FcGoogle } from "react-icons/fc";
+import SignInForm from "../forms/signin-form";
+import { handleSocialSignOn } from "@/lib/user";
 
 const SignInBox = () => {
   return (
@@ -20,32 +22,14 @@ const SignInBox = () => {
           </h4>
           <span className="flex flex-row gap-1.5 -mt-3 text-sm items-center text-gray-600">
             Don&apos;t have an account?
-            <Button variant="link" className="py-0 px-0">
-              Sign up
-            </Button>
+            <Link href="/auth/signup">
+              <Button variant="link" className="py-0 px-0">
+                Sign up
+              </Button>
+            </Link>
           </span>
 
-          <form className="w-full mt-4 flex flex-col space-y-5 px-5 md:px-0">
-            <div className="field-1 flex flex-col space-y-2">
-              <Label htmlFor="email" className="tracking-wide">
-                Email
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="johndoe@example.com"
-              />
-            </div>
-
-            <div className="field-2 flex flex-col space-y-2">
-              <Label htmlFor="password" className="tracking-wide">
-                Password
-              </Label>
-              <Input id="password" type="password" />
-            </div>
-
-            <Button type="submit">Continue</Button>
-          </form>
+          <SignInForm />
 
           <div className="divider w-full px-8 md:px-4 flex justify-center items-center gap-1 mt-2 mb-2">
             <Separator className="w-1/2" />
@@ -57,12 +41,14 @@ const SignInBox = () => {
             <Button
               className="w-full py-5 flex flex-row items-center gap-4"
               variant="outline"
+              onClick={(e) => handleSocialSignOn("github")}
             >
               <SiGithub className="scale-110" /> Login with Github
             </Button>
             <Button
               className="w-full py-5 flex flex-row items-center gap-4"
               variant="outline"
+              onClick={(e) => handleSocialSignOn("google")}
             >
               <FcGoogle className="scale-110" /> Login with Google
             </Button>
