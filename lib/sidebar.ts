@@ -16,7 +16,7 @@ export const sidebarQuickLinks: Array<SidebarMenuItem> = [
     icon: FaCode,
   },
   {
-    title: "Overview",
+    title: "Analytics",
     url: "#",
     icon: SiSimpleanalytics,
   },

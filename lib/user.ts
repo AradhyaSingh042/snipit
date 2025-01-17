@@ -6,5 +6,3 @@ export const handleSocialSignOn = async (provider: "github" | "google") => {
     callbackURL: "/dashboard",
   });
 };
-
-

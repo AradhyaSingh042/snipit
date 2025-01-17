@@ -1,3 +1,5 @@
+import DashboardNavbar from "@/components/client/dashboard.navbar";
+import Snippet from "@/components/quick-links/snippet";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -13,7 +15,10 @@ const Dashboard = async () => {
 
   return (
     <>
-      <div className="dashboard-container w-full h-full bg-white overflow-x-hidden flex justify-center items-center"></div>
+      <div className="dashboard-container w-full h-full bg-white overflow-x-hidden">
+        <DashboardNavbar />
+        <Snippet />
+      </div>
     </>
   );
 };
