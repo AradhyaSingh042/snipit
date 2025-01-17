@@ -1,8 +1,9 @@
 "use client";
 
+import { SidebarMenuButton } from "../ui/sidebar";
+import { FiLogOut } from "react-icons/fi";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { Button } from "../ui/button";
 
 const LogoutButton = () => {
   const router = useRouter();
@@ -16,7 +17,13 @@ const LogoutButton = () => {
       },
     });
   };
-  return <Button onClick={handleLogOut}>Logout</Button>;
+
+  return (
+    <SidebarMenuButton className="flex pl-4 space-x-2 py-5 tracking-wide text-black">
+      <FiLogOut />
+      <span onClick={handleLogOut}>Logout</span>
+    </SidebarMenuButton>
+  );
 };
 
 export default LogoutButton;
