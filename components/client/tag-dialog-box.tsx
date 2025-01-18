@@ -15,8 +15,11 @@ import { Button } from "../ui/button";
 import { useSnippetStore } from "@/store/snippet";
 import { useState } from "react";
 import { createTag } from "@/actions/action";
+import { useRouter } from "next/navigation";
 
 const TagDialogBox = () => {
+  const router = useRouter();
+
   const [tag, setTag] = useState<string>("");
   const { setTags } = useSnippetStore();
 
@@ -49,15 +52,18 @@ const TagDialogBox = () => {
                 Cancel
               </Button>
             </DialogClose>
-            <Button
-              className="bg-teal-600 tracking-wide"
-              onClick={(e) => {
-                setTags(tag);
-                createTag(tag);
-              }}
-            >
-              Add Tag
-            </Button>
+            <DialogClose asChild>
+              <Button
+                className="bg-teal-600 tracking-wide"
+                onClick={(e) => {
+                  setTags(tag);
+                  createTag(tag);
+                  router.refresh();
+                }}
+              >
+                Add Tag
+              </Button>
+            </DialogClose>
           </div>
         </DialogHeader>
       </DialogContent>

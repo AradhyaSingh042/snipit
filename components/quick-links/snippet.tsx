@@ -1,9 +1,10 @@
-import { prisma } from "@/lib/prisma";
+import SnippetCard from "../client/snippet-card";
 import TagDialogBox from "../client/tag-dialog-box";
 import { Button } from "../ui/button";
+import { fetchTags } from "@/actions/action";
 
 const Snippet = async () => {
-  const tags = await prisma.tag.findMany();
+  const tags = await fetchTags();
 
   return (
     <>
@@ -25,6 +26,10 @@ const Snippet = async () => {
           );
         })}
         <TagDialogBox />
+      </div>
+
+      <div className="snippet-container mt-8 pl-6">
+        <SnippetCard />
       </div>
     </>
   );

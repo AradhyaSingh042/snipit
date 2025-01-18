@@ -21,7 +21,7 @@ import { MdOutlineDescription } from "react-icons/md";
 import { MdOutlineCode } from "react-icons/md";
 
 import AceEditor from "react-ace";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ace from "ace-builds";
 
 // Import modes
@@ -40,8 +40,12 @@ import "ace-builds/src-min-noconflict/theme-tomorrow_night";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import { useSnippetStore } from "@/store/snippet";
 import { CodingLanguage } from "@/types/type";
+import { Button } from "../ui/button";
+import { createSnippet } from "@/actions/action";
 
 const SnippetSheet = () => {
+  const [tagName, setTagName] = useState<string>("");
+
   const {
     title,
     setTitle,
@@ -69,7 +73,7 @@ const SnippetSheet = () => {
           <IoAddOutline className="scale-110 text-white" />
           <span>Snippet</span>
         </SheetTrigger>
-        <SheetContent>
+        <SheetContent className="w-[400px] sm:w-[600px] pb-10 overflow-y-scroll">
           <SheetHeader>
             <SheetTitle className="flex flex-row relative">
               <MdTextFields className="absolute top-6 -left-2 scale-110 mt-[2px] text-gray-500" />
@@ -80,15 +84,11 @@ const SnippetSheet = () => {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </SheetTitle>
-            <span className="text-sm text-gray-500">
-              {title} {description} {language}
-              {code}
-            </span>
           </SheetHeader>
 
-          <div className="mt-6 flex relative">
+          <div className="mt-6 flex relative items-center">
             <IoPricetags className="absolute top-2 -left-2 scale-110 mt-[1px] text-gray-500" />
-            <Select>
+            <Select onValueChange={setTags}>
               <SelectTrigger className="w-[90px] ml-6 h-8">
                 <SelectValue placeholder="Tag" />
               </SelectTrigger>
@@ -102,6 +102,20 @@ const SnippetSheet = () => {
                 <SelectItem value="HTML Snippets">HTML Snippets</SelectItem>
               </SelectContent>
             </Select>
+
+            <div className="flex flex-row -space-x-6 -ml-1 items-center">
+              {tags.map((tag, index) => {
+                return (
+                  <Button
+                    className="scale-75 bg-slate-200"
+                    variant="outline"
+                    key={index}
+                  >
+                    {tag.name}
+                  </Button>
+                );
+              })}
+            </div>
           </div>
 
           <div className="mt-7 flex relative">
@@ -155,6 +169,24 @@ const SnippetSheet = () => {
                 }}
               />
             </div>
+          </div>
+
+          <div className="w-full mt-7 flex justify-start pl-6">
+            <Button
+              className="bg-teal-600 tracking-wide"
+              size="lg"
+              onClick={(e) =>
+                createSnippet({
+                  title,
+                  tags,
+                  description,
+                  language,
+                  code,
+                })
+              }
+            >
+              Add Snippet
+            </Button>
           </div>
         </SheetContent>
       </Sheet>
