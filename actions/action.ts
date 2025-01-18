@@ -57,6 +57,8 @@ export const createSnippet = async ({
       tags: true,
     },
   });
+
+  fetchSnippets();
 };
 
 export const fetchTags = async () => {
@@ -65,6 +67,10 @@ export const fetchTags = async () => {
 };
 
 export const fetchSnippets = async () => {
-  const snippets = await prisma.snippet.findMany();
+  const snippets = await prisma.snippet.findMany({
+    include: {
+      tags: true,
+    },
+  });
   return snippets;
 };

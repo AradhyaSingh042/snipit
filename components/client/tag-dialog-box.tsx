@@ -25,7 +25,7 @@ const TagDialogBox = () => {
 
   return (
     <Dialog defaultOpen={false}>
-      <DialogTrigger className="text-white bg-black flex flex-row items-center gap-2 py-1.5 px-3 rounded-md">
+      <DialogTrigger className="text-white bg-black flex flex-row items-center gap-2 py-1 px-3 rounded-md">
         <IoAddOutline className="scale-110 text-white" />
         <span>Tag</span>
       </DialogTrigger>

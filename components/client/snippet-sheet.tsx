@@ -1,5 +1,8 @@
+"use client";
+
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -42,9 +45,10 @@ import { useSnippetStore } from "@/store/snippet";
 import { CodingLanguage } from "@/types/type";
 import { Button } from "../ui/button";
 import { createSnippet } from "@/actions/action";
+import { useRouter } from "next/navigation";
 
 const SnippetSheet = () => {
-  const [tagName, setTagName] = useState<string>("");
+  const router = useRouter();
 
   const {
     title,
@@ -69,11 +73,11 @@ const SnippetSheet = () => {
   return (
     <>
       <Sheet>
-        <SheetTrigger className="text-white bg-black flex flex-row items-center gap-2 py-1.5 px-3 rounded-md">
+        <SheetTrigger className="text-white bg-black flex flex-row items-center gap-2 py-1.5 px-4 rounded-md">
           <IoAddOutline className="scale-110 text-white" />
           <span>Snippet</span>
         </SheetTrigger>
-        <SheetContent className="w-[400px] sm:w-[600px] pb-10 overflow-y-scroll">
+        <SheetContent className="w-[400px] sm:w-[600px] pb-6 overflow-y-scroll">
           <SheetHeader>
             <SheetTitle className="flex flex-row relative">
               <MdTextFields className="absolute top-6 -left-2 scale-110 mt-[2px] text-gray-500" />
@@ -89,8 +93,8 @@ const SnippetSheet = () => {
           <div className="mt-6 flex relative items-center">
             <IoPricetags className="absolute top-2 -left-2 scale-110 mt-[1px] text-gray-500" />
             <Select onValueChange={setTags}>
-              <SelectTrigger className="w-[90px] ml-6 h-8">
-                <SelectValue placeholder="Tag" />
+              <SelectTrigger className="w-[80px] ml-6 h-8">
+                <SelectValue placeholder="Tag">Tag</SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="API Methods">API Methods</SelectItem>
@@ -172,21 +176,24 @@ const SnippetSheet = () => {
           </div>
 
           <div className="w-full mt-7 flex justify-start pl-6">
-            <Button
-              className="bg-teal-600 tracking-wide"
-              size="lg"
-              onClick={(e) =>
-                createSnippet({
-                  title,
-                  tags,
-                  description,
-                  language,
-                  code,
-                })
-              }
-            >
-              Add Snippet
-            </Button>
+            <SheetClose asChild>
+              <Button
+                className="bg-teal-600 tracking-wide px-7"
+                size="lg"
+                onClick={(e) => {
+                  createSnippet({
+                    title,
+                    tags,
+                    description,
+                    language,
+                    code,
+                  });
+                  router.refresh();
+                }}
+              >
+                Add Snippet
+              </Button>
+            </SheetClose>
           </div>
         </SheetContent>
       </Sheet>

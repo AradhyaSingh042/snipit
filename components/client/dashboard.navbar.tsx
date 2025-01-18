@@ -2,8 +2,6 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { IoAddOutline } from "react-icons/io5";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,39 +11,33 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-
 import { IoSunnyOutline } from "react-icons/io5";
 import { FiMoon } from "react-icons/fi";
 import { useSnippetStore } from "@/store/snippet";
 import { useTheme } from "@/hooks/use-theme";
 import { IoSearch } from "react-icons/io5";
 import SnippetSheet from "./snippet-sheet";
+import { authClient } from "@/lib/auth-client";
 
 const DashboardNavbar = () => {
   const { darkMode, setDarkMode } = useSnippetStore();
   useTheme();
 
+  const { data: session } = authClient.useSession();
+
   return (
     <>
       <div className="dashboard-nav-container px-4 py-4 w-full flex flexrow justify-between items-center">
-        <div className="left-container flex flex-row items-center w-1/2">
+        <div className="left-container flex flex-row items-center w-1/2 pl-2">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src={session?.user.image as string} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 
           <div className="user-container flex flex-col ml-3">
-            <h5 className="text-base font-medium">Ali Ounassi</h5>
+            <h5 className="text-base font-medium">{session?.user.name}</h5>
             <span className="text-xs tracking-wide text-gray-500">
-              aliounassi@gmail.com
+              {session?.user.email}
             </span>
           </div>
           <div className="search-container relative flex w-full ml-8">

@@ -31,3 +31,20 @@ export interface SidebarMenuItem {
   url: string;
   icon: IconType;
 }
+
+export interface SnippetCardProps {
+  title: string;
+  description: string;
+  language: string;
+  code: string;
+  createdAt: Date;
+  tags: Array<{
+    id: string;
+    name: string;
+  }>;
+}
+
+export interface CodeSnippetBlockProps {
+  code: string;
+  language: string;
+}
