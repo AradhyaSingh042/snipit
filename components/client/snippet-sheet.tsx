@@ -24,7 +24,7 @@ import { MdOutlineDescription } from "react-icons/md";
 import { MdOutlineCode } from "react-icons/md";
 
 import AceEditor from "react-ace";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ace from "ace-builds";
 
 // Import modes

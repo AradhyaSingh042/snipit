@@ -44,7 +44,18 @@ export interface SnippetCardProps {
   }>;
 }
 
+export interface SnippetData {
+  title: string;
+  tags: Array<{
+    name: string;
+  }>;
+  description: string;
+  language: string;
+  code: string;
+}
+
 export interface CodeSnippetBlockProps {
   code: string;
   language: string;
 }
+

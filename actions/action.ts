@@ -2,17 +2,8 @@
 
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { SnippetData } from "@/types/interface";
 import { headers } from "next/headers";
-
-interface SnippetData {
-  title: string;
-  tags: Array<{
-    name: string;
-  }>;
-  description: string;
-  language: string;
-  code: string;
-}
 
 export const createTag = async (tag: string) => {
   const createdTag = await prisma.tag.create({
@@ -20,7 +11,6 @@ export const createTag = async (tag: string) => {
       name: tag,
     },
   });
-  fetchTags();
 };
 
 export const createSnippet = async ({
@@ -57,8 +47,6 @@ export const createSnippet = async ({
       tags: true,
     },
   });
-
-  fetchSnippets();
 };
 
 export const fetchTags = async () => {

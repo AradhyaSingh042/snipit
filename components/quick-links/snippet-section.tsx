@@ -3,7 +3,7 @@ import TagDialogBox from "../client/tag-dialog-box";
 import { Button } from "../ui/button";
 import { fetchSnippets, fetchTags } from "@/actions/action";
 
-const Snippet = async () => {
+const SnippetSection = async () => {
   const tags = await fetchTags();
   const snippets = await fetchSnippets();
 
@@ -48,4 +48,4 @@ const Snippet = async () => {
   );
 };
 
-export default Snippet;
+export default SnippetSection;
