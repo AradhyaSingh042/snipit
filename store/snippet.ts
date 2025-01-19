@@ -1,12 +1,12 @@
-import { snippetSlice, tagSlice, themeSlice } from "@/types/interface";
+import { SnippetSlice, TagSlice, ThemeSlice } from "@/types/interface";
 import { create, StateCreator } from "zustand";
 
-const createThemeSlice: StateCreator<themeSlice> = (set) => ({
+const createThemeSlice: StateCreator<ThemeSlice> = (set) => ({
   darkMode: false,
   setDarkMode: (state) => set(() => ({ darkMode: state })),
 });
 
-const createSnippetSlice: StateCreator<snippetSlice> = (set) => ({
+const createSnippetSlice: StateCreator<SnippetSlice> = (set) => ({
   title: "",
   setTitle: (value) => set((state) => ({ ...state, title: value })),
   tags: [],
@@ -29,12 +29,12 @@ const createSnippetSlice: StateCreator<snippetSlice> = (set) => ({
   setCode: (value) => set((state) => ({ ...state, code: value })),
 });
 
-const createTagSlice: StateCreator<tagSlice> = (set) => ({
+const createTagSlice: StateCreator<TagSlice> = (set) => ({
   name: "",
   setName: (value) => set((state) => ({ name: value })),
 });
 
-export const useSnippetStore = create<themeSlice & snippetSlice & tagSlice>(
+export const useSnippetStore = create<ThemeSlice & SnippetSlice & TagSlice>(
   (...a) => ({
     ...createThemeSlice(...a),
     ...createSnippetSlice(...a),

@@ -1,12 +1,12 @@
 import { IconType } from "react-icons/lib";
 import { CodingLanguage } from "./type";
 
-export interface themeSlice {
+export interface ThemeSlice {
   darkMode: boolean;
   setDarkMode: (state: boolean) => void;
 }
 
-export interface snippetSlice {
+export interface SnippetSlice {
   title: string;
   setTitle: (value: string) => void;
   description: string;
@@ -21,7 +21,7 @@ export interface snippetSlice {
   setCode: (value: string) => void;
 }
 
-export interface tagSlice {
+export interface TagSlice {
   name: string;
   setName: (value: string) => void;
 }

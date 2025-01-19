@@ -24,7 +24,7 @@ import { MdOutlineDescription } from "react-icons/md";
 import { MdOutlineCode } from "react-icons/md";
 
 import AceEditor from "react-ace";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ace from "ace-builds";
 
 // Import modes
@@ -44,11 +44,14 @@ import "ace-builds/src-min-noconflict/ext-language_tools";
 import { useSnippetStore } from "@/store/snippet";
 import { CodingLanguage } from "@/types/type";
 import { Button } from "../ui/button";
-import { createSnippet } from "@/actions/action";
+import { createSnippet, fetchTags } from "@/actions/action";
 import { useRouter } from "next/navigation";
 
 const SnippetSheet = () => {
   const router = useRouter();
+  // const [sheetTag, setSheetTags] = useState<
+  //   Array<Promise<{ id: string; name: string }>>
+  // >([]);
 
   const {
     title,
@@ -63,11 +66,19 @@ const SnippetSheet = () => {
     setTags,
   } = useSnippetStore();
 
+  const getTags = async () => {
+    const tags = await fetchTags();
+    return tags;
+  };
+
   useEffect(() => {
     ace.config.set(
       "basePath",
       "https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/"
     );
+
+    // const tags = getTags();
+    // setSheetTags(tags)
   }, []);
 
   return (
