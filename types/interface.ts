@@ -19,6 +19,8 @@ export interface SnippetSlice {
   setLanguage: (value: CodingLanguage) => void;
   code: string;
   setCode: (value: string) => void;
+  isFavorite: boolean;
+  setIsFavorite: () => void;
 }
 
 export interface TagSlice {
@@ -33,6 +35,7 @@ export interface SidebarMenuItem {
 }
 
 export interface SnippetCardProps {
+  id: string;
   title: string;
   description: string;
   language: string;
@@ -42,6 +45,8 @@ export interface SnippetCardProps {
     id: string;
     name: string;
   }>;
+  isFavorite: boolean;
+  isDeleted: boolean;
 }
 
 export interface SnippetData {
@@ -58,4 +63,3 @@ export interface CodeSnippetBlockProps {
   code: string;
   language: string;
 }
-

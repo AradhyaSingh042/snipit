@@ -49,10 +49,9 @@ import { useRouter } from "next/navigation";
 
 const SnippetSheet = () => {
   const router = useRouter();
-  // const [sheetTag, setSheetTags] = useState<
-  //   Array<Promise<{ id: string; name: string }>>
-  // >([]);
-
+  const [sheetTags, setSheetTags] = useState<
+    Array<{ id: string; name: string }>
+  >([]);
   const {
     title,
     setTitle,
@@ -77,9 +76,10 @@ const SnippetSheet = () => {
       "https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/"
     );
 
-    // const tags = getTags();
-    // setSheetTags(tags)
-  }, []);
+    getTags().then((tags) => {
+      setSheetTags(tags);
+    });
+  }, [sheetTags, setSheetTags]);
 
   return (
     <>
@@ -108,13 +108,17 @@ const SnippetSheet = () => {
                 <SelectValue placeholder="Tag">Tag</SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="API Methods">API Methods</SelectItem>
-                <SelectItem value="Javascript Functions">
-                  Javascript Functions
-                </SelectItem>
-                <SelectItem value="React Functions">React Functions</SelectItem>
-                <SelectItem value="Python Scripts">Python Scripts</SelectItem>
-                <SelectItem value="HTML Snippets">HTML Snippets</SelectItem>
+                {sheetTags.map((tag) => {
+                  return (
+                    <SelectItem
+                      key={tag.id}
+                      value={tag.name}
+                      className="capitalize"
+                    >
+                      {tag.name}
+                    </SelectItem>
+                  );
+                })}
               </SelectContent>
             </Select>
 
@@ -198,8 +202,7 @@ const SnippetSheet = () => {
                     description,
                     language,
                     code,
-                  });
-                  router.refresh();
+                  }).then(() => router.refresh());
                 }}
               >
                 Add Snippet

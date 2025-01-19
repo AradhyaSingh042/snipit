@@ -1,13 +1,9 @@
-"use client";
-
 import { FaCode } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import { SiGithub } from "react-icons/si";
-import { FcGoogle } from "react-icons/fc";
 import SignUpForm from "../forms/signup-form";
-import { handleSocialSignOn } from "@/lib/user";
 import Link from "next/link";
+import SocialSignupButtons from "../client-side/social-signup-buttons";
 
 const SignUpBox = () => {
   return (
@@ -38,20 +34,7 @@ const SignUpBox = () => {
           </div>
 
           <div className="social-container px-5 md:px-0 w-full flex flex-col space-y-4">
-            <Button
-              className="w-full py-5 flex flex-row items-center gap-4"
-              variant="outline"
-              onClick={(e) => handleSocialSignOn("github")}
-            >
-              <SiGithub className="scale-110" /> Sign up with Github
-            </Button>
-            <Button
-              className="w-full py-5 flex flex-row items-center gap-4"
-              variant="outline"
-              onClick={(e) => handleSocialSignOn("google")}
-            >
-              <FcGoogle className="scale-110" /> Sign up with Google
-            </Button>
+            <SocialSignupButtons />
           </div>
         </div>
       </div>

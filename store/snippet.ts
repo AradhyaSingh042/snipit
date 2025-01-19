@@ -1,4 +1,5 @@
 import { SnippetSlice, TagSlice, ThemeSlice } from "@/types/interface";
+import { boolean } from "zod";
 import { create, StateCreator } from "zustand";
 
 const createThemeSlice: StateCreator<ThemeSlice> = (set) => ({
@@ -27,6 +28,12 @@ const createSnippetSlice: StateCreator<SnippetSlice> = (set) => ({
   setLanguage: (value) => set((state) => ({ ...state, language: value })),
   code: "",
   setCode: (value) => set((state) => ({ ...state, code: value })),
+  isFavorite: false,
+  setIsFavorite: () =>
+    set((state) => {
+      const newValue = !state.isFavorite;
+      return { ...state, isFavorite: newValue };
+    }),
 });
 
 const createTagSlice: StateCreator<TagSlice> = (set) => ({

@@ -1,5 +1,3 @@
-"use client";
-
 import { CodeBlock } from "@/components/ui/code-block";
 import { CodeSnippetBlockProps } from "@/types/interface";
 

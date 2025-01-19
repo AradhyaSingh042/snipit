@@ -3,16 +3,14 @@ import TagDialogBox from "../client/tag-dialog-box";
 import { Button } from "../ui/button";
 import { fetchSnippets, fetchTags } from "@/actions/action";
 
-const SnippetSection = async () => {
+const TrashSection = async () => {
   const tags = await fetchTags();
   const snippets = await fetchSnippets();
 
   return (
     <>
       <div className="heading-container w-full pt-4 pl-6">
-        <h3 className="font-bold text-3xl tracking-wide capitalize">
-          Overview
-        </h3>
+        <h3 className="font-bold text-3xl tracking-wide capitalize">Trash</h3>
         <span className="text-gray-500 text-sm ml-[1px] tracking-wide">
           Manage your snippets collection
         </span>
@@ -51,4 +49,4 @@ const SnippetSection = async () => {
   );
 };
 
-export default SnippetSection;
+export default TrashSection;

@@ -62,3 +62,25 @@ export const fetchSnippets = async () => {
   });
   return snippets;
 };
+
+export const setFavorite = async (snippetId: string, isFavorite: boolean) => {
+  await prisma.snippet.update({
+    where: {
+      id: snippetId,
+    },
+    data: {
+      isFavorite,
+    },
+  });
+};
+
+export const moveToTrash = async (snippetId: string, isDeleted: boolean) => {
+  await prisma.snippet.update({
+    where: {
+      id: snippetId,
+    },
+    data: {
+      isDeleted: isDeleted,
+    },
+  });
+};

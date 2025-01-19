@@ -6,22 +6,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { MdFavorite } from "react-icons/md";
-import { FaTrashAlt } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { CodeSnippetBlock } from "./code-block-demo";
 import { format } from "date-fns";
 import { SnippetCardProps } from "@/types/interface";
 import { sidebarLanguages } from "@/lib/sidebar";
 import { IconType } from "react-icons/lib";
+import FavoriteButton from "../client-side/favorite-button";
+import TrashButton from "../client-side/trash-button";
 
 const SnippetCard: React.FC<SnippetCardProps> = async ({
+  id,
   title,
   description,
   language,
   code,
   createdAt,
   tags,
+  isFavorite,
+  isDeleted,
 }) => {
   const date = format(createdAt, "PP");
   const snippetLanguage = sidebarLanguages.find(
@@ -37,7 +40,7 @@ const SnippetCard: React.FC<SnippetCardProps> = async ({
           <CardTitle className="text-base font-semibold tracking-wide">
             {title}
           </CardTitle>
-          <MdFavorite className="text-gray-600 scale-125" />
+          <FavoriteButton isFavorite={isFavorite} snippetId={id} />
         </CardHeader>
         <CardContent className="flex flex-col">
           <p className="text-gray-500 text-sm -mt-4">{date}</p>
@@ -67,7 +70,7 @@ const SnippetCard: React.FC<SnippetCardProps> = async ({
             </span>
           </div>
 
-          <FaTrashAlt className="text-gray-600 scale-110" />
+          <TrashButton snippetId={id} isDeleted={isDeleted} />
         </CardFooter>
       </Card>
     </>
