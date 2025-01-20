@@ -11,46 +11,54 @@ import { SiTypescript } from "react-icons/si";
 
 export const sidebarQuickLinks: Array<SidebarMenuItem> = [
   {
+    id: 1,
     title: "Snippets",
-    url: "#",
+    url: "/dashboard/snippet",
     icon: FaCode,
   },
   {
+    id: 2,
     title: "Analytics",
-    url: "#",
+    url: "/dashboard/analytics",
     icon: SiSimpleanalytics,
   },
   {
+    id: 3,
     title: "Favorites",
-    url: "#",
+    url: "/dashboard/favorite",
     icon: MdFavorite,
   },
   {
+    id: 4,
     title: "Trash",
-    url: "#",
+    url: "/dashboard/trash",
     icon: FaTrashAlt,
   },
   {
+    id: 5,
     title: "Tags",
-    url: "#",
+    url: "/dashboard/snippet",
     icon: IoPricetags,
   },
 ];
 
 export const sidebarLanguages: Array<SidebarMenuItem> = [
   {
+    id: 1,
     title: "Javascript",
     url: "#",
     icon: SiJavascript,
   },
 
   {
+    id: 2,
     title: "Python",
     url: "#",
     icon: SiPython,
   },
 
   {
+    id: 3,
     title: "Typescript",
     url: "#",
     icon: SiTypescript,

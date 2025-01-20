@@ -29,6 +29,7 @@ export interface TagSlice {
 }
 
 export interface SidebarMenuItem {
+  id: number;
   title: string;
   url: string;
   icon: IconType;

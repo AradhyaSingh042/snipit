@@ -35,7 +35,7 @@ const SignInForm = () => {
         //show loading
       },
       onSuccess: () => {
-        router.push("/dashboard");
+        router.push("/dashboard/snippet");
       },
       onError: (ctx) => {
         alert(ctx.error.message);

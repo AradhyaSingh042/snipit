@@ -1,18 +1,33 @@
-import SnippetCard from "../client/snippet-card";
-import TagDialogBox from "../client/tag-dialog-box";
-import { Button } from "../ui/button";
-import { fetchSnippets, fetchTags } from "@/actions/action";
+import { fetchTags } from "@/actions/action";
+import SnippetCard from "@/components/client/snippet-card";
+import TagDialogBox from "@/components/client/tag-dialog-box";
+import { Button } from "@/components/ui/button";
+import { prisma } from "@/lib/prisma";
 
-const FavoriteSection = async () => {
-  const tags = await fetchTags();
-  const snippets = await fetchSnippets();
+async function fetchDeletedSnippets() {
+  const deletedSnippets = await prisma.snippet.findMany(
+    {
+      where: {
+        isDeleted: true
+      },
+
+      include: {
+        tags: true
+      }
+    }
+  )
+
+  return deletedSnippets
+}
+
+const TrashSection = async () => {
+  const tags = await fetchTags()
+  const deletedSnippets = await fetchDeletedSnippets()
 
   return (
     <>
       <div className="heading-container w-full pt-4 pl-6">
-        <h3 className="font-bold text-3xl tracking-wide capitalize">
-          Favorite
-        </h3>
+        <h3 className="font-bold text-3xl tracking-wide capitalize">Trash</h3>
         <span className="text-gray-500 text-sm ml-[1px] tracking-wide">
           Manage your snippets collection
         </span>
@@ -30,7 +45,7 @@ const FavoriteSection = async () => {
       </div>
 
       <div className="snippet-container mt-8 w-full grid grid-cols-2 gap-x-6 gap-y-8 px-6 mb-8">
-        {snippets.map((snippet) => {
+        {deletedSnippets.map((snippet) => {
           return (
             <SnippetCard
               key={snippet.id}
@@ -51,4 +66,4 @@ const FavoriteSection = async () => {
   );
 };
 
-export default FavoriteSection;
+export default TrashSection;

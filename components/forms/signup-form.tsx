@@ -36,7 +36,7 @@ const SignUpForm = () => {
         //show loading
       },
       onSuccess: (ctx) => {
-        router.push("/dashboard");
+        router.push("/dashboard/snippet");
       },
       onError: (ctx) => {
         alert(ctx.error.message);

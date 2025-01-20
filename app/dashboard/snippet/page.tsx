@@ -1,7 +1,7 @@
-import SnippetCard from "../client/snippet-card";
-import TagDialogBox from "../client/tag-dialog-box";
-import { Button } from "../ui/button";
 import { fetchSnippets, fetchTags } from "@/actions/action";
+import SnippetCard from "@/components/client/snippet-card";
+import TagDialogBox from "@/components/client/tag-dialog-box";
+import { Button } from "@/components/ui/button";
 
 const SnippetSection = async () => {
   const tags = await fetchTags();

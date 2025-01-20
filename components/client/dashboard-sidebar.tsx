@@ -13,22 +13,11 @@ import {
 } from "../ui/sidebar";
 import { quickSand } from "@/lib/fonts";
 import { Separator } from "../ui/separator";
-import { sidebarLanguages, sidebarQuickLinks } from "@/lib/sidebar";
-import { FiLogOut } from "react-icons/fi";
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { sidebarLanguages } from "@/lib/sidebar";
+import SidebarQuickLinks from "../client-side/sidebar-quick-links";
+import LogoutButton from "../client-side/logout-button";
 
 const DashboardSidebar = () => {
-  const handleLogOut = async () => {
-    "use server";
-    await auth.api.signOut({
-      headers: await headers(),
-    });
-
-    redirect("/auth/signin");
-  };
-
   return (
     <aside className="sidebar-container">
       <Sidebar>
@@ -52,18 +41,7 @@ const DashboardSidebar = () => {
               Quick Links
             </SidebarGroupLabel>
             <SidebarGroupContent className="pt-1">
-              <SidebarMenu>
-                {sidebarQuickLinks.map((item, index) => {
-                  return (
-                    <SidebarMenuItem key={index}>
-                      <SidebarMenuButton className="flex py-5 space-x-2 font-medium pl-3 tracking-wide text-zinc-700">
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  );
-                })}
-              </SidebarMenu>
+              <SidebarQuickLinks />
             </SidebarGroupContent>
           </SidebarGroup>
 
@@ -73,9 +51,9 @@ const DashboardSidebar = () => {
             </SidebarGroupLabel>
             <SidebarGroupContent className="pt-1">
               <SidebarMenu>
-                {sidebarLanguages.map((item, index) => {
+                {sidebarLanguages.map((item) => {
                   return (
-                    <SidebarMenuItem key={index}>
+                    <SidebarMenuItem key={item.id}>
                       <SidebarMenuButton className="flex py-5 space-x-2 pl-3 font-medium tracking-wide text-zinc-700">
                         <item.icon />
                         <span>{item.title}</span>
@@ -91,20 +69,14 @@ const DashboardSidebar = () => {
         <Separator />
         <SidebarFooter className="bg-white">
           <SidebarMenu>
-            <SidebarMenuItem className="w-full py-1">
-              <SidebarMenuButton
-                className="flex pl-4 space-x-2 py-5 tracking-wide font-medium text-black"
-                onClick={handleLogOut}
-              >
-                <FiLogOut />
-                <span>Logout</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <LogoutButton />
           </SidebarMenu>
         </SidebarFooter>
       </Sidebar>
     </aside>
   );
 };
+
+
 
 export default DashboardSidebar;

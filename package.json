@@ -28,6 +28,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "ioredis": "^5.4.2",
     "lucide-react": "^0.471.1",
     "next": "15.1.4",
     "prisma": "^6.2.1",

@@ -1,5 +1,4 @@
 import { SnippetSlice, TagSlice, ThemeSlice } from "@/types/interface";
-import { boolean } from "zod";
 import { create, StateCreator } from "zustand";
 
 const createThemeSlice: StateCreator<ThemeSlice> = (set) => ({
