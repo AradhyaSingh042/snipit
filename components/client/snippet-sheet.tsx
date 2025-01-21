@@ -1,5 +1,6 @@
 "use client";
 
+import { useQueryClient } from '@tanstack/react-query';
 import {
   Sheet,
   SheetClose,
@@ -48,6 +49,8 @@ import { createSnippet, fetchTags } from "@/actions/action";
 import { useRouter } from "next/navigation";
 
 const SnippetSheet = () => {
+  const queryClient = useQueryClient();
+
   const router = useRouter();
   const [sheetTags, setSheetTags] = useState<
     Array<{ id: string; name: string }>
@@ -203,6 +206,7 @@ const SnippetSheet = () => {
                     language,
                     code,
                   }).then(() => router.refresh());
+                  queryClient.refetchQueries();
                 }}
               >
                 Add Snippet

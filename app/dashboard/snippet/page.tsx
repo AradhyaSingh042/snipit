@@ -1,11 +1,23 @@
-import { fetchSnippets, fetchTags } from "@/actions/action";
-import SnippetCard from "@/components/client/snippet-card";
-import TagDialogBox from "@/components/client/tag-dialog-box";
-import { Button } from "@/components/ui/button";
+"use client";
 
-const SnippetSection = async () => {
-  const tags = await fetchTags();
-  const snippets = await fetchSnippets();
+import { fetchSnippets } from "@/actions/action";
+import TagList from "@/components/client-side/tag-list";
+import SnippetCard from "@/components/client/snippet-card";
+import { useDataStore } from "@/store/data";
+import { useQuery } from "@tanstack/react-query";
+
+const SnippetSection = () => {
+  let { data: snippets } = useQuery({
+    queryKey: ["getSnippets"],
+    queryFn: fetchSnippets,
+  });
+  const { filter } = useDataStore();
+
+  if (filter) {
+    snippets = snippets?.filter((snippet) => {
+      return snippet.tags.find((tag) => tag.name === filter);
+    });
+  }
 
   return (
     <>
@@ -18,34 +30,26 @@ const SnippetSection = async () => {
         </span>
       </div>
 
-      <div className="tags-container mt-5 pl-6 flex flex-row space-x-4 items-center w-full">
-        {tags.map((tag, index) => {
-          return (
-            <Button key={index} variant="outline" size="sm">
-              {tag.name}
-            </Button>
-          );
-        })}
-        <TagDialogBox />
-      </div>
+      <TagList />
 
       <div className="snippet-container mt-8 w-full grid grid-cols-2 gap-x-6 gap-y-8 px-6 mb-8">
-        {snippets.map((snippet) => {
-          return (
-            <SnippetCard
-              key={snippet.id}
-              id={snippet.id}
-              title={snippet.title as string}
-              description={snippet.description as string}
-              language={snippet.language as string}
-              code={snippet.code as string}
-              createdAt={snippet.createdAt}
-              tags={snippet.tags}
-              isFavorite={snippet.isFavorite}
-              isDeleted={snippet.isDeleted}
-            />
-          );
-        })}
+        {snippets &&
+          snippets.map((snippet) => {
+            return (
+              <SnippetCard
+                key={snippet.id}
+                id={snippet.id}
+                title={snippet.title as string}
+                description={snippet.description as string}
+                language={snippet.language as string}
+                code={snippet.code as string}
+                createdAt={snippet.createdAt}
+                tags={snippet.tags}
+                isFavorite={snippet.isFavorite}
+                isDeleted={snippet.isDeleted}
+              />
+            );
+          })}
       </div>
     </>
   );

@@ -18,6 +18,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   Snippet       Snippet[]
+  Tag           Tag[]
 
   @@unique([email])
   @@map("user")
@@ -89,6 +90,8 @@ model Tag {
   id       String    @id @default(uuid())
   name     String    @unique
   snippets Snippet[]
+  userId   String
+  user     User      @relation(fields: [userId], references: [id])
 
   @@map("tag")
 }

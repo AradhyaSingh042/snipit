@@ -1,5 +1,6 @@
 "use client";
 
+import { useQueryClient } from '@tanstack/react-query';
 import { MdFavoriteBorder } from "react-icons/md";
 import { MdFavorite } from "react-icons/md";
 import { Button } from "../ui/button";
@@ -15,6 +16,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   snippetId,
   isFavorite,
 }) => {
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   return (
@@ -22,6 +24,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
       <Button
         onClick={(e) => {
           setFavorite(snippetId, !isFavorite).then(() => router.refresh());
+          queryClient.refetchQueries()
         }}
         className="bg-transparent shadow-none border-none hover:bg-transparent"
       >

@@ -1,16 +1,17 @@
+'use client'
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "../ui/input";
 import { IoSearch } from "react-icons/io5";
 import SnippetSheet from "./snippet-sheet";
 import ThemeDropdown from "../client-side/theme-dropdown";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { authClient } from "@/lib/auth-client";
 
-const DashboardNavbar = async () => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+const DashboardNavbar = () => {
+  const {
+    data: session,
 
+  } = authClient.useSession()
   return (
     <>
       <div className="dashboard-nav-container px-4 py-4 w-full flex flexrow justify-between items-center">

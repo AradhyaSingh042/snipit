@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useQueryClient } from '@tanstack/react-query';
 import { Button } from "../ui/button";
 import { FaTrashAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ interface TrashButtonProps {
 }
 
 const TrashButton: React.FC<TrashButtonProps> = ({ snippetId, isDeleted }) => {
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   return (
@@ -21,6 +22,7 @@ const TrashButton: React.FC<TrashButtonProps> = ({ snippetId, isDeleted }) => {
         className="bg-transparent shadow-none border-none hover:bg-transparent"
         onClick={(e) => {
           moveToTrash(snippetId, !isDeleted).then(() => router.refresh());
+          queryClient.refetchQueries()
         }}
       >
         {isDeleted ? (

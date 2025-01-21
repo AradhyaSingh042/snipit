@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Card,
   CardContent,
@@ -15,7 +17,7 @@ import { IconType } from "react-icons/lib";
 import FavoriteButton from "../client-side/favorite-button";
 import TrashButton from "../client-side/trash-button";
 
-const SnippetCard: React.FC<SnippetCardProps> = async ({
+const SnippetCard: React.FC<SnippetCardProps> = ({
   id,
   title,
   description,

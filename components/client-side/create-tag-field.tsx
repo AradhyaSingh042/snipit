@@ -1,5 +1,6 @@
 "use client";
 
+import { useQueryClient } from '@tanstack/react-query';
 import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -9,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { createTag } from "@/actions/action";
 
 const CreateTagField = () => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const [tag, setTag] = useState<string>("");
 
@@ -35,7 +37,9 @@ const CreateTagField = () => {
           <Button
             className="bg-teal-600 tracking-wide"
             onClick={(e) => {
+
               createTag(tag).then(() => router.refresh());
+              queryClient.refetchQueries()
             }}
           >
             Add Tag

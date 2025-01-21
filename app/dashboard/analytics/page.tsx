@@ -1,3 +1,5 @@
+'use client'
+
 const AnalyticsSection = () => {
   return (
     <div>Hello, Analytics!</div>

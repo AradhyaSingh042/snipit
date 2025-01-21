@@ -1,3 +1,5 @@
+'use client'
+
 import { IoAddOutline } from "react-icons/io5";
 import {
   Dialog,

@@ -1,18 +1,11 @@
-import { fetchTags } from "@/actions/action";
 import { create } from "zustand";
 
 interface DataStoreProps {
-  currentTags: Array<{
-    id: string;
-    name: string;
-  }>;
-  setCurrentTags: () => Promise<void>;
+  filter: string;
+  setFilter: (value: string) => void;
 }
 
 export const useDataStore = create<DataStoreProps>((set) => ({
-  currentTags: [],
-  setCurrentTags: async () => {
-    const tags = await fetchTags();
-    set((state) => ({ ...state, currentTags: tags }));
-  },
+  filter: "",
+  setFilter: (value) => set((state) => ({ ...state, filter: value })),
 }));

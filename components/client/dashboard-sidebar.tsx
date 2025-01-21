@@ -1,3 +1,5 @@
+'use client'
+
 import { FaCode } from "react-icons/fa6";
 import {
   Sidebar,
@@ -76,7 +78,5 @@ const DashboardSidebar = () => {
     </aside>
   );
 };
-
-
 
 export default DashboardSidebar;

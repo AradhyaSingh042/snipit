@@ -1,28 +1,28 @@
-import { fetchTags } from "@/actions/action";
+'use client'
+
+import { fetchFavoriteSnippets } from "@/actions/action";
+import TagList from "@/components/client-side/tag-list";
 import SnippetCard from "@/components/client/snippet-card";
-import TagDialogBox from "@/components/client/tag-dialog-box";
-import { Button } from "@/components/ui/button";
-import { prisma } from "@/lib/prisma";
+import { useDataStore } from "@/store/data";
 
-async function fetchFavoriteSnippets() {
-  const favSnippets = await prisma.snippet.findMany(
-    {
-      where: {
-        isFavorite: true
-      },
+import { useQuery } from "@tanstack/react-query";
 
-      include: {
-        tags: true
-      }
-    }
-  )
+const FavoriteSection = () => {
 
-  return favSnippets
-}
+  let { data: favSnippets } = useQuery({
+    queryKey: ["getFavSnippets"],
+    queryFn: () => {
+      return fetchFavoriteSnippets()
+    },
+  });
 
-const FavoriteSection = async () => {
-  const tags = await fetchTags();
-  const favSnippets = await fetchFavoriteSnippets();
+  const { filter } = useDataStore()
+
+  if (filter) {
+    favSnippets = favSnippets?.filter((snippet) => {
+      return snippet.tags.find((tag) => tag.name === filter)
+    })
+  }
 
   return (
     <>
@@ -35,19 +35,10 @@ const FavoriteSection = async () => {
         </span>
       </div>
 
-      <div className="tags-container mt-5 pl-6 flex flex-row space-x-4 items-center w-full">
-        {tags.map((tag, index) => {
-          return (
-            <Button key={index} variant="outline" size="sm">
-              {tag.name}
-            </Button>
-          );
-        })}
-        <TagDialogBox />
-      </div>
+      <TagList />
 
       <div className="snippet-container mt-8 w-full grid grid-cols-2 gap-x-6 gap-y-8 px-6 mb-8">
-        {favSnippets.map((snippet) => {
+        {favSnippets && favSnippets.map((snippet) => {
           return (
             <SnippetCard
               key={snippet.id}
@@ -68,4 +59,4 @@ const FavoriteSection = async () => {
   );
 };
 
-export default FavoriteSection;
+export default FavoriteSection
